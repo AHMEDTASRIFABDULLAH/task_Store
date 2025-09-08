@@ -2,18 +2,45 @@ import { useState } from "react";
 import { FaFolder, FaChevronDown, FaChevronRight } from "react-icons/fa";
 
 const categoriesData = [
-  { id: 1, name: "Electronics", children: [ { id: 2, name: "Phones", children: [ { id: 3, name: "iPhone", children: [] }, { id: 4, name: "Samsung", children: [] } ] }, { id: 5, name: "Laptops", children: [ { id: 6, name: "MacBook", children: [] }, { id: 7, name: "Windows Laptop", children: [] } ] } ] },
-  { id: 8, name: "Clothing", children: [ { id: 9, name: "Men", children: [] }, { id: 10, name: "Women", children: [] } ] }
+  {
+    id: 1,
+    name: "Electronics",
+    children: [
+      {
+        id: 2,
+        name: "Phones",
+        children: [
+          { id: 3, name: "iPhone", children: [] },
+          { id: 4, name: "Samsung", children: [] }
+        ]
+      },
+      {
+        id: 5,
+        name: "Laptops",
+        children: [
+          { id: 6, name: "MacBook", children: [] },
+          { id: 7, name: "Windows Laptop", children: [] }
+        ]
+      }
+    ]
+  },
+  {
+    id: 8,
+    name: "Clothing",
+    children: [
+      { id: 9, name: "Men", children: [] },
+      { id: 10, name: "Women", children: [] }
+    ]
+  }
 ];
 
 function App() {
   const [checkedItems, setCheckedItems] = useState([]);
   const [expandedIds, setExpandedIds] = useState([]);
 
-  // সব child ids recursively নেবে
-  const getAllChildIds = (category) => category.children.reduce((acc, child) => [...acc, child.id, ...getAllChildIds(child)], []);
+  const getAllChildIds = (category) =>
+    category.children.reduce((acc, child) => [...acc, child.id, ...getAllChildIds(child)], []);
 
-  // parent ids recursively বের করবে
   const getParentIds = (id, categories, parents = []) => {
     for (const category of categories) {
       if (category.id === id) return parents;
@@ -25,7 +52,6 @@ function App() {
     return null;
   };
 
-  // checkbox handle
   const handleCheck = (category, isChecked) => {
     const allChildIds = getAllChildIds(category);
     if (isChecked) {
@@ -36,7 +62,6 @@ function App() {
     }
   };
 
-  // category name by id
   const getCategoryNameById = (id, categories) => {
     for (const category of categories) {
       if (category.id === id) return category.name;
@@ -48,24 +73,10 @@ function App() {
     return null;
   };
 
-  // category level by id
-  const getCategoryLevelById = (id, categories, level = 0) => {
-    for (const category of categories) {
-      if (category.id === id) return level;
-      if (category.children.length > 0) {
-        const childLevel = getCategoryLevelById(id, category.children, level + 1);
-        if (childLevel !== null) return childLevel;
-      }
-    }
-    return null;
-  };
-
-  // toggle expand/collapse
   const toggleExpand = (id) => {
     setExpandedIds(prev => prev.includes(id) ? prev.filter(eid => eid !== id) : [...prev, id]);
   };
 
-  // recursively render categories
   const renderCategory = (category, level = 0) => {
     const isChecked = checkedItems.includes(category.id);
     const hasChildren = category.children.length > 0;
@@ -94,7 +105,6 @@ function App() {
     );
   };
 
-  // শুধু leaf nodes
   const getLeafIds = (categories) => {
     let leaves = [];
     for (const category of categories) {
@@ -120,7 +130,7 @@ function App() {
           <h3 className="text-gray-700 font-semibold mb-2">Selected Categories:</h3>
           <div className="flex flex-wrap gap-2">
             {checkedItems
-              .filter(id => getLeafIds(categoriesData).includes(id)) // শুধু leaf nodes দেখাবে
+              .filter(id => getLeafIds(categoriesData).includes(id))
               .map(id => (
                 <span key={id} className="px-3 py-1 rounded-full text-sm bg-sky-400 text-white">
                   {getCategoryNameById(id, categoriesData)}
