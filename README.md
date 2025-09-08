@@ -1,12 +1,26 @@
-# React + Vite
+# React Category Sidebar with Dropdown and Checkbox Selection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+This project is a **React.js web application** that displays a **sidebar with hierarchical categories**. Each main category can be expanded to show child categories (dropdown style). Users can **select categories using checkboxes**, and the selected categories are displayed in the main content area with **distinct colors**:
 
-Currently, two official plugins are available:
+- **Main category:** Red button
+- **Child category:** Skyblue button
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The sidebar is **mobile responsive** and the main layout adjusts based on screen size.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+- **Sidebar with collapsible categories:** Click on a main category to expand or collapse child categories.
+- **Hierarchical selection:** Selecting a child category automatically selects its parent category(s).
+- **Checkbox selection:** Users can select multiple categories.
+- **Display selected categories:** Selected categories are shown in the main content area with color-coded badges.
+- **Responsive design:** Works well on mobile and desktop screens.
+- **Icons:** Uses `react-icons` for folder and dropdown indicators.
+
+---
+
+## Technologies Used
+- **React.js** (functional components with hooks)
+- **Tailwind CSS** for styling
+- **React Icons** (`FaFolder`, `FaChevronDown`, `FaChevronRight`)
