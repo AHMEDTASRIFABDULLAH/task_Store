@@ -1,6 +1,4 @@
-# React Category Sidebar with Dropdown and Checkbox Selection
-
-## Project Overview
+## Task Overview
 This project is a **React.js web application** that displays a **sidebar with hierarchical categories**. Each main category can be expanded to show child categories (dropdown style). Users can **select categories using checkboxes**, and the selected categories are displayed in the main content area with **distinct colors**:
 
 - **Main category:** Red button
